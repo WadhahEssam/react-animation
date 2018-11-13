@@ -30,3 +30,35 @@
     transform: rotate(360deg);
   }
 }
+
+.todoItem {
+  background: #9E9E9E;
+  padding: 10px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 800;
+  width: 60%;
+  margin: 10px auto;
+  position: relative;
+}
+
+.todoItemDone {
+  background: #83b180;
+  padding: 10px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 800;
+  width: 60%;
+  margin: 10px auto;
+  position: relative;
+}
+
+.todoText {
+  display: inline;
+}
+
+.todoCheckbox {
+  display: inline;
+  position: absolute;
+  right: 10px;
+}

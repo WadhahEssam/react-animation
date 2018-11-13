@@ -1,25 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  state = {
+    todos: [{text: "create a new thing", isDone: true}],
+    todoInput: '',
+  }
+
+  addTodo = () => {
+    this.setState({todos: [...this.state.todos , {text: this.state.todoInput, isDone: false}], todoInput: ''})
+  }
+
   render() {
+    const todos = this.state.todos.map((todo, index) => {
+      return (<div className={(todo.isDone) ? "todoItemDone" : "todoItem"} key={index}>
+                <p className="todoText"> {todo.text}</p>
+                <input checked={todo.isDone} className="todoCheckbox" type="checkbox" 
+                onChange={(e) => {
+                    const clonedTodos = this.state.todos.slice();
+                    clonedTodos[index].isDone = e.target.checked;
+                    this.setState({todos: clonedTodos});
+                  }} />
+              </div>);
+    });
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <div>
+          {todos}
+        </div>
+
+        <div>
+          <input type="text" value={this.state.todoInput} onChange={(e) => {this.setState({todoInput: e.target.value})}} />
+          <button onClick={this.addTodo}>add</button>
+        </div>
       </div>
     );
   }
